@@ -7,11 +7,38 @@
             <span></span>
         </div>
         <ul class="menu">
-            <li>Accueil</li>
-            <li>Nos services</li>
-            <li>L'agence</li>
-            <li>L'équipe</li>
-            <li>Contact</li>
+            <li>
+                <a @click.prevent.stop="slideTo" href="#accueil">Accueil</a>
+            </li>
+            <li>
+                <a @click.prevent.stop="slideTo" href="#services">Nos services</a>
+            </li>
+            <li>
+                <a @click.prevent.stop="slideTo" href="#agence">L'agence</a>
+            </li>
+            <li>
+                <a @click.prevent.stop="slideTo" href="#equipe">L'équipe</a>
+            </li>
+            <li>
+                <a @click.prevent.stop="slideTo" href="#contact">Contact</a>
+            </li>
+        </ul>
+        <ul class="side-menu">
+            <li @click.prevent="slideTo">
+                <a href="#accueil" @click.prevent="slideTo">Accueil</a>
+            </li>
+            <li @click.prevent="slideTo">
+                <a href="#services" @click.prevent="slideTo">Nos services</a>
+            </li>
+            <li @click.prevent="slideTo">
+                <a href="#agence" @click.prevent="slideTo">L'agence</a>
+            </li>
+            <li @click.prevent="slideTo">
+                <a href="#equipe" @click.prevent="slideTo">L'équipe</a>
+            </li>
+            <li @click.prevent="slideTo">
+                <a href="#contact" @click.prevent="slideTo">Contact</a>
+            </li>
         </ul>
     </div>
 </template>
@@ -24,6 +51,16 @@
                 menuOpened: false,
             }
         },
+        methods: {
+            slideTo($event) {
+                const elem = $($event.target);
+                const id = elem[0].tagName.toLowerCase() === 'a' ? elem.attr('href') : elem.find('a').attr('href');
+                $('html, body').animate({
+                    scrollTop: $(id).offset().top
+                }, 300);
+                if (this.menuOpened) this.menuOpened = false;
+            }
+        }
     }
 </script>
 
@@ -32,7 +69,7 @@
     #navbar {
         display: block;
         position: relative;
-        background: #ffffff;
+        background: #F9F9F9;
         padding: 15px 40px;
     }
     #navbar img {
@@ -50,6 +87,14 @@
         display: inline-block;
         margin: 0 15px;
         font-size: 20px;
+        cursor: pointer;
+    }
+    #navbar .menu li:hover {
+        color: #b14823;
+    }
+    #navbar li a {
+        color: #404040;
+        text-decoration: none;
     }
 
     #navbar .menu-btn {
@@ -92,6 +137,7 @@
         }
         #navbar .menu {
             position: absolute;
+            z-index: 9;
             left: 0;
             top: $navbarMiniHeight;
             width: 100%;
@@ -100,6 +146,9 @@
             border-top: solid 1px #a0a0a0;
             border-bottom: solid 1px #a0a0a0;
             padding: 0;
+        }
+        #navbar .menu li a {
+            color: #FFFFFF;
         }
         #navbar .menu li {
             line-height: $navbarElemsMiniHeight;
@@ -130,6 +179,59 @@
             transform: rotate(45deg);
             position: absolute;
             top: calc(50%);
+        }
+    }
+
+    .side-menu {
+        display: none;
+        position: fixed;
+        top: calc(50% - 100px);
+        right: 40px;
+        text-align: right;
+        list-style: none;
+        height: 200px;
+        padding: 0;
+        margin: 0;
+    }
+    .side-menu li {
+        height: 40px;
+        line-height: 40px;
+        font-size: 18px;
+        position: relative;
+        font-family: "Kiona",sans-serif;
+        cursor: pointer;
+        text-transform: uppercase;
+    }
+    .side-menu li a {
+        color: transparent !important;
+        transition: color ease 0.2s;
+    }
+    .side-menu li.active a, .side-menu li:hover a {
+        color: #404040 !important;
+    }
+    .side-menu li::after {
+        content: '';
+        position: absolute;
+        right: -25px;
+        top: 12.5px;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        border: solid 2px #404040;
+        background-color: transparent;
+    }
+    .side-menu li.active::after {
+        background-color: #404040;
+    }
+
+    @media screen and (min-width: 993px) {
+        .side-menu.visible {
+            display: block;
+        }
+    }
+    @media screen and (max-width: 992px) {
+        .side-menu.visible {
+            display: none !important;
         }
     }
 

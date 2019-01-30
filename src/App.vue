@@ -5,15 +5,15 @@
 
     <Menu />
 
-    <Accueil />
+    <Accueil id="accueil" />
 
-    <Services @toggleModal="toggleBackdrop" />
+    <Services id="services" @toggleModal="toggleBackdrop" />
 
-    <Agence @toggleModal="toggleBackdrop" />
+    <Agence id="agence" @toggleModal="toggleBackdrop" />
 
-    <Equipe @toggleModal="toggleBackdrop" />
+    <Equipe id="equipe" @toggleModal="toggleBackdrop" />
 
-    <Contact @toggleModal="toggleBackdrop" />
+    <Contact id="contact" @toggleModal="toggleBackdrop" />
 
     <Footer />
 
@@ -88,6 +88,7 @@ export default {
     background: #ffffff;
     opacity: 0;
     transition: all ease 0.2s;
+    overflow: auto;
   }
   .modal.expanded {
     z-index: 10;
@@ -96,6 +97,16 @@ export default {
     top: 5%;
     width: 90%;
     height: 90%;
+  }
+
+  .modal .close {
+    background: transparent;
+    border: none;
+    font-size: 50px;
+    position: absolute;
+    right: 15px;
+    top: 5px;
+    cursor: pointer;
   }
 
   .text-right {
@@ -119,7 +130,7 @@ export default {
   }
 
   section {
-    padding: 40px;
+    padding: 40px 40px 80px 40px;
   }
   section .btn-container {
     position: relative;
@@ -130,6 +141,9 @@ export default {
     text-transform: uppercase;
     font-weight: bold;
     background: #f16776;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
   }
   section .side {
     padding: 30px 40px;
@@ -154,6 +168,12 @@ export default {
      }
     section .side {
       text-align: center;
+    }
+    .modal .close {
+      font-size: 35px;
+      right: 5px;
+      top: 5px;
+      cursor: pointer;
     }
   }
 

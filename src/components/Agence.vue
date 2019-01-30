@@ -52,6 +52,7 @@
         methods: {
             toggleModal() {
                 this.expanded = !this.expanded;
+                this.$emit('toggleModal');
             }
         }
     }

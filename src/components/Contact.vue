@@ -19,13 +19,6 @@
                         <img src="../assets/telephone_1.png" alt="icon" />
                         04 26 28 01 19
                     </p>
-                    <div class="btn-container">
-                        <button class="btn-plus" @click="toggleModal">Voir plus</button>
-                        <ContactModal
-                                @toggleModal="toggleModal"
-                                class="modal"
-                                :class="expanded ? 'expanded' : ''" />
-                    </div>
                 </div>
                 <div class="col-md-4 side d-none d-md-block d-lg-block">
                     <img src="../assets/telephone.png" alt="icon"/>
@@ -36,10 +29,8 @@
 </template>
 
 <script>
-    import ContactModal from "./ContactModal";
     export default {
         name: 'Contact',
-        components: {ContactModal},
         data() {
             return {
                 expanded: false,
@@ -48,6 +39,7 @@
         methods: {
             toggleModal() {
                 this.expanded = !this.expanded;
+                this.$emit('toggleModal');
             }
         }
     }
